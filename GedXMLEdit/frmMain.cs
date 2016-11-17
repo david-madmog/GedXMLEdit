@@ -104,6 +104,11 @@ namespace GedXMLEdit
                 Global.GedFile.Display(lstItems, "OTHER");
             }
         }
+
+        private void txtFile_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public static class Global

@@ -50,7 +50,8 @@
             this.txtFile.Name = "txtFile";
             this.txtFile.Size = new System.Drawing.Size(395, 20);
             this.txtFile.TabIndex = 0;
-            this.txtFile.Text = "C:\\Users\\davidp\\Documents\\Personal\\Madmog website\\TREE\\SRC\\David.xml";
+            this.txtFile.Text = "C:\\Users\\davidp\\Documents\\GitHub\\FamilyTreeWeb\\DAVID.XML";
+            this.txtFile.TextChanged += new System.EventHandler(this.txtFile_TextChanged);
             // 
             // label1
             // 
