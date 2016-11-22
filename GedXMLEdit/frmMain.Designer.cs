@@ -40,6 +40,7 @@
             this.rdoIndi = new System.Windows.Forms.RadioButton();
             this.rdoFams = new System.Windows.Forms.RadioButton();
             this.rdoOthers = new System.Windows.Forms.RadioButton();
+            this.cmdNewItem = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtFile
@@ -51,7 +52,6 @@
             this.txtFile.Size = new System.Drawing.Size(395, 20);
             this.txtFile.TabIndex = 0;
             this.txtFile.Text = "C:\\Users\\davidp\\Documents\\GitHub\\FamilyTreeWeb\\DAVID.XML";
-            this.txtFile.TextChanged += new System.EventHandler(this.txtFile_TextChanged);
             // 
             // label1
             // 
@@ -93,6 +93,7 @@
             this.lstItems.MultiColumn = true;
             this.lstItems.Name = "lstItems";
             this.lstItems.Size = new System.Drawing.Size(460, 173);
+            this.lstItems.Sorted = true;
             this.lstItems.TabIndex = 4;
             this.lstItems.SelectedIndexChanged += new System.EventHandler(this.lstItems_SelectedIndexChanged);
             this.lstItems.DoubleClick += new System.EventHandler(this.lstItems_DoubleClick);
@@ -101,7 +102,7 @@
             // 
             this.lblItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblItem.AutoSize = true;
-            this.lblItem.Location = new System.Drawing.Point(115, 314);
+            this.lblItem.Location = new System.Drawing.Point(211, 314);
             this.lblItem.Name = "lblItem";
             this.lblItem.Size = new System.Drawing.Size(10, 13);
             this.lblItem.TabIndex = 5;
@@ -110,7 +111,7 @@
             // cmdEditItem
             // 
             this.cmdEditItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdEditItem.Location = new System.Drawing.Point(15, 309);
+            this.cmdEditItem.Location = new System.Drawing.Point(111, 309);
             this.cmdEditItem.Name = "cmdEditItem";
             this.cmdEditItem.Size = new System.Drawing.Size(94, 23);
             this.cmdEditItem.TabIndex = 6;
@@ -170,11 +171,23 @@
             this.rdoOthers.UseVisualStyleBackColor = true;
             this.rdoOthers.CheckedChanged += new System.EventHandler(this.rdoOthers_CheckedChanged);
             // 
+            // cmdNewItem
+            // 
+            this.cmdNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdNewItem.Location = new System.Drawing.Point(12, 309);
+            this.cmdNewItem.Name = "cmdNewItem";
+            this.cmdNewItem.Size = new System.Drawing.Size(94, 23);
+            this.cmdNewItem.TabIndex = 12;
+            this.cmdNewItem.Text = "New Item";
+            this.cmdNewItem.UseVisualStyleBackColor = true;
+            this.cmdNewItem.Click += new System.EventHandler(this.cmdNewItem_Click);
+            // 
             // frmGEDXmlEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 344);
+            this.Controls.Add(this.cmdNewItem);
             this.Controls.Add(this.rdoOthers);
             this.Controls.Add(this.rdoFams);
             this.Controls.Add(this.rdoIndi);
@@ -208,6 +221,7 @@
         private System.Windows.Forms.RadioButton rdoIndi;
         private System.Windows.Forms.RadioButton rdoFams;
         private System.Windows.Forms.RadioButton rdoOthers;
+        private System.Windows.Forms.Button cmdNewItem;
     }
 }
 

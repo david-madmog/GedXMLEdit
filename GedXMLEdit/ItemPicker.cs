@@ -33,7 +33,7 @@ namespace GedXMLEdit
                     mID = "";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 mID = "";
             }

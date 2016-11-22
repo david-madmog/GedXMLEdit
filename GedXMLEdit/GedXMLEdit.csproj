@@ -64,6 +64,7 @@
     <Compile Include="IndiEdit.Designer.cs">
       <DependentUpon>IndiEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyDate.cs" />
     <Compile Include="NoteEdit.cs">
       <SubType>Form</SubType>
     </Compile>

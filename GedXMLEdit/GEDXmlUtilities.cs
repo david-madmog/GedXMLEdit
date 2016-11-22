@@ -12,7 +12,7 @@ namespace GedXMLEdit
         // Code to force UpdateSingleField to create empty element
         public const string InsertEmpty = "\0x1B";
 
-        static public DateTime ParseDate(XmlNode Node)
+        static public MyDate ParseDate(XmlNode Node)
         {
             foreach (XmlNode Child in Node.ChildNodes)
             {
@@ -20,15 +20,15 @@ namespace GedXMLEdit
                 {
                     try
                     {
-                        return DateTime.Parse(Child.InnerText);
+                        return MyDate.Parse(Child.InnerText);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        return DateTime.MinValue;
+                        return MyDate.MinValue;
                     }
                 }
             }
-            return DateTime.MinValue;
+            return MyDate.MinValue;
         }
 
         static public String ParsePlace(XmlNode Node)
@@ -70,6 +70,9 @@ namespace GedXMLEdit
         static public XmlNode UpdateSingleField(String Field, String Value, XmlNode Node)
         {
             XmlNode ChildNode = null;
+
+            if (Value != null)
+                Value = Value.Trim();
 
             if (Value == "")
             {
@@ -137,7 +140,6 @@ namespace GedXMLEdit
             }
             return ChildNode;
         }
-
 
         static public XmlNode GlobalLocateNodeByID(string ID, string NodeType, XmlNode Node)
         {

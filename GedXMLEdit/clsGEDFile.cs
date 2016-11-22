@@ -60,6 +60,66 @@ namespace GedXMLEdit
             }
         }
 
+        public GEDFileEntry NewEntry(string Type, XmlDocument Doc)
+        {
+            GEDFileEntry Entry = null;
+            String sIDCode = "";
+
+            switch (Type)
+            {
+                case "HEAD":
+                    Entry = new GEDFileEntryHead();
+                    sIDCode = "X";
+                    break;
+                case "SUBM":
+                    Entry = new GEDFileEntrySubm();
+                    sIDCode = "SUB";
+                    break;
+                case "INDI":
+                    Entry = new GEDFileEntryIndi();
+                    sIDCode = "I";
+                    break;
+                case "FAM":
+                    Entry = new GEDFileEntryFam();
+                    sIDCode = "F";
+                    break;
+                case "SOUR":
+                    Entry = new GEDFileEntrySour();
+                    sIDCode = "S";
+                    break;
+                default:
+                    frmGEDXmlEditor.Log("Node type not recognised: " + Type);
+                    break;
+            }
+            if (Entry != null)
+            {
+                XmlNode Node;
+                Node = Doc.CreateElement(Type);
+                // Everything will fall apart if we create an element with no ID
+                GEDXMLUtilites.SetAttribute("ID", GetNextID(sIDCode), Node);
+                Doc.DocumentElement.AppendChild(Node);
+                Entry.Node = Node;
+                Entries.Add(Entry);
+            }
+
+            return Entry;
+        }
+
+        private string GetNextID(string sIDCode)
+        {
+            int Max = 0;
+
+            foreach (GEDFileEntry FEntry in Entries)
+            {
+                if ( FEntry.ID.Substring(0, sIDCode.Length) == sIDCode)
+                {
+                    Max = Math.Max(Max, Int32.Parse(FEntry.ID.Substring(sIDCode.Length)));
+                }
+            }
+
+            return sIDCode + (Max + 1).ToString();
+        }
+
         public static bool IsGedXMLFile(XmlDocument Doc)
         {
             if (Doc.DocumentElement.Name == "GED")
@@ -85,7 +145,7 @@ namespace GedXMLEdit
         }
     }
 
-    class GEDFileEntry
+    public class GEDFileEntry
     {
         //public String Type;
         public String ID;
@@ -124,7 +184,7 @@ namespace GedXMLEdit
 
         virtual public void Edit()
         {
-            MessageBox.Show(DisplayName, "Unable to Edit Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(DisplayName, "Not yet implemented: Unable to Edit Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -170,8 +230,27 @@ namespace GedXMLEdit
             foreach (XmlNode Child in vNode.ChildNodes)
             {
                 if (Child.Name.ToUpper() == "NAME")
-                    DisplayName = Child.InnerText.Trim(); 
+                    DisplayName = GetDisplayName(Child.InnerText.Trim()); 
             }
+        }
+
+        private string GetDisplayName(string sRawName)
+        {
+            string sNewName;
+            if (sRawName.Contains("//"))
+            {
+                sNewName = "ʘ " + sRawName.Replace("//", "").Trim();
+            }
+            else if (sRawName.Contains('/'))
+            {
+                sNewName = sRawName.Substring(sRawName.IndexOf('/') + 1) + " " + sRawName.Substring(0, sRawName.IndexOf('/'));
+                sNewName = sNewName.Replace('/', ',');
+            }
+            else
+            {
+                sNewName = "ʘ " + sRawName;
+            }
+            return sNewName;
         }
 
         override public string ListType()
@@ -185,6 +264,11 @@ namespace GedXMLEdit
             IndiEdit EditDialog = new IndiEdit(pNode, ImageBase);
 
             EditDialog.ShowDialog();
+            foreach (XmlNode Child in pNode.ChildNodes)
+            {
+                if (Child.Name.ToUpper() == "NAME")
+                    DisplayName = Child.InnerText.Trim();
+            }
         }
     }
 
@@ -235,7 +319,7 @@ namespace GedXMLEdit
                                 Husb.Node = tmpNode;
                             }
                         }
-                        catch (Exception ex) { }
+                        catch (Exception) { }
                         break;
                     case "WIFE":
                         try
@@ -248,7 +332,7 @@ namespace GedXMLEdit
                                 Wife.Node = tmpNode;
                             }
                         }
-                        catch (Exception ex) { }
+                        catch (Exception) { }
                         break;
                     default:
                         break;
@@ -295,6 +379,5 @@ namespace GedXMLEdit
             return "SOUR";
         }
     }
-
 
 }

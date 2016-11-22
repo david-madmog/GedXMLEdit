@@ -68,6 +68,27 @@ namespace GedXMLEdit
             Entry.Edit();
         }
 
+        private void cmdNewItem_Click(object sender, EventArgs e)
+        {
+            GEDFileEntry Entry;
+            string Type = "";
+
+            if (Global.GedFile != null)
+            {
+                if (rdoIndi.Checked)
+                    Type ="INDI" ;
+                else if(rdoFams.Checked)
+                    Type = "FAM" ;
+                else
+                    Type = "SOUR" ;
+
+                Entry = Global.GedFile.NewEntry(Type, Doc);
+                Entry.ImageBase = txtImageBase.Text;
+                Entry.Edit();
+            }
+            Global.GedFile.Display(lstItems, Type);
+        }
+
         private void lstItems_DoubleClick(object sender, EventArgs e)
         {
             cmdEditItem_Click(sender, e);
@@ -83,7 +104,8 @@ namespace GedXMLEdit
             if (rdoIndi.Checked)
             {
                 lstItems.ColumnWidth = 150;
-                Global.GedFile.Display(lstItems, "INDI");
+                if (Global.GedFile != null)
+                    Global.GedFile.Display(lstItems, "INDI");
             }
         }
 
@@ -92,7 +114,8 @@ namespace GedXMLEdit
             if (rdoFams.Checked)
             {
                 lstItems.ColumnWidth = 300;
-                Global.GedFile.Display(lstItems, "FAM");
+                if (Global.GedFile != null)
+                    Global.GedFile.Display(lstItems, "FAM");
             }
         }
 
@@ -101,14 +124,11 @@ namespace GedXMLEdit
             if (rdoOthers.Checked)
             {
                 lstItems.ColumnWidth = 100;
-                Global.GedFile.Display(lstItems, "OTHER");
+                if (Global.GedFile != null)
+                    Global.GedFile.Display(lstItems, "OTHER");
             }
         }
 
-        private void txtFile_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 
     public static class Global

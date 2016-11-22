@@ -43,9 +43,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.rdoMale = new System.Windows.Forms.RadioButton();
             this.rdoFemale = new System.Windows.Forms.RadioButton();
-            this.dtpBirth = new System.Windows.Forms.DateTimePicker();
             this.txtBirth = new System.Windows.Forms.TextBox();
-            this.dtpDeath = new System.Windows.Forms.DateTimePicker();
             this.txtAKA = new System.Windows.Forms.TextBox();
             this.txtDeath = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -57,7 +55,24 @@
             this.ofdFile = new System.Windows.Forms.OpenFileDialog();
             this.lblSource = new System.Windows.Forms.Label();
             this.cmdSource = new System.Windows.Forms.Button();
+            this.mcDatePicker = new System.Windows.Forms.MonthCalendar();
+            this.pnlBirth = new System.Windows.Forms.Panel();
+            this.cmdBirthPick = new System.Windows.Forms.Button();
+            this.txtBirthYear = new System.Windows.Forms.NumericUpDown();
+            this.txtBirthMonth = new System.Windows.Forms.TextBox();
+            this.txtBirthDate = new System.Windows.Forms.TextBox();
+            this.chkBirth = new System.Windows.Forms.CheckBox();
+            this.pnlDeath = new System.Windows.Forms.Panel();
+            this.chkDeath = new System.Windows.Forms.CheckBox();
+            this.cmdDetahPick = new System.Windows.Forms.Button();
+            this.txtDeathYear = new System.Windows.Forms.NumericUpDown();
+            this.txtDeathMonth = new System.Windows.Forms.TextBox();
+            this.txtDeathDate = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlBirth.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBirthYear)).BeginInit();
+            this.pnlDeath.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeathYear)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdOK
@@ -200,28 +215,12 @@
             this.rdoFemale.Text = "Female";
             this.rdoFemale.UseVisualStyleBackColor = true;
             // 
-            // dtpBirth
-            // 
-            this.dtpBirth.Location = new System.Drawing.Point(83, 79);
-            this.dtpBirth.Name = "dtpBirth";
-            this.dtpBirth.ShowCheckBox = true;
-            this.dtpBirth.Size = new System.Drawing.Size(156, 20);
-            this.dtpBirth.TabIndex = 15;
-            // 
             // txtBirth
             // 
             this.txtBirth.Location = new System.Drawing.Point(247, 80);
             this.txtBirth.Name = "txtBirth";
             this.txtBirth.Size = new System.Drawing.Size(148, 20);
             this.txtBirth.TabIndex = 16;
-            // 
-            // dtpDeath
-            // 
-            this.dtpDeath.Location = new System.Drawing.Point(83, 105);
-            this.dtpDeath.Name = "dtpDeath";
-            this.dtpDeath.ShowCheckBox = true;
-            this.dtpDeath.Size = new System.Drawing.Size(156, 20);
-            this.dtpDeath.TabIndex = 17;
             // 
             // txtAKA
             // 
@@ -316,6 +315,160 @@
             this.cmdSource.UseVisualStyleBackColor = true;
             this.cmdSource.Click += new System.EventHandler(this.cmdSource_Click);
             // 
+            // mcDatePicker
+            // 
+            this.mcDatePicker.Location = new System.Drawing.Point(361, 112);
+            this.mcDatePicker.Name = "mcDatePicker";
+            this.mcDatePicker.TabIndex = 29;
+            this.mcDatePicker.Visible = false;
+            this.mcDatePicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcDatePicker_DateChanged);
+            // 
+            // pnlBirth
+            // 
+            this.pnlBirth.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlBirth.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlBirth.Controls.Add(this.chkBirth);
+            this.pnlBirth.Controls.Add(this.cmdBirthPick);
+            this.pnlBirth.Controls.Add(this.txtBirthYear);
+            this.pnlBirth.Controls.Add(this.txtBirthMonth);
+            this.pnlBirth.Controls.Add(this.txtBirthDate);
+            this.pnlBirth.Location = new System.Drawing.Point(83, 79);
+            this.pnlBirth.Name = "pnlBirth";
+            this.pnlBirth.Size = new System.Drawing.Size(158, 21);
+            this.pnlBirth.TabIndex = 35;
+            // 
+            // cmdBirthPick
+            // 
+            this.cmdBirthPick.Location = new System.Drawing.Point(131, -1);
+            this.cmdBirthPick.Name = "cmdBirthPick";
+            this.cmdBirthPick.Size = new System.Drawing.Size(24, 19);
+            this.cmdBirthPick.TabIndex = 38;
+            this.cmdBirthPick.Text = "V";
+            this.cmdBirthPick.UseVisualStyleBackColor = true;
+            this.cmdBirthPick.Click += new System.EventHandler(this.cmdBirthPick_Click);
+            // 
+            // txtBirthYear
+            // 
+            this.txtBirthYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBirthYear.Location = new System.Drawing.Point(85, 2);
+            this.txtBirthYear.Maximum = new decimal(new int[] {
+            2099,
+            0,
+            0,
+            0});
+            this.txtBirthYear.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.txtBirthYear.Name = "txtBirthYear";
+            this.txtBirthYear.Size = new System.Drawing.Size(47, 16);
+            this.txtBirthYear.TabIndex = 37;
+            this.txtBirthYear.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // txtBirthMonth
+            // 
+            this.txtBirthMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBirthMonth.Location = new System.Drawing.Point(35, 2);
+            this.txtBirthMonth.Name = "txtBirthMonth";
+            this.txtBirthMonth.Size = new System.Drawing.Size(50, 13);
+            this.txtBirthMonth.TabIndex = 36;
+            // 
+            // txtBirthDate
+            // 
+            this.txtBirthDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBirthDate.Location = new System.Drawing.Point(20, 2);
+            this.txtBirthDate.Name = "txtBirthDate";
+            this.txtBirthDate.Size = new System.Drawing.Size(18, 13);
+            this.txtBirthDate.TabIndex = 35;
+            // 
+            // chkBirth
+            // 
+            this.chkBirth.AutoSize = true;
+            this.chkBirth.Location = new System.Drawing.Point(3, 3);
+            this.chkBirth.Name = "chkBirth";
+            this.chkBirth.Size = new System.Drawing.Size(15, 14);
+            this.chkBirth.TabIndex = 39;
+            this.chkBirth.UseVisualStyleBackColor = true;
+            this.chkBirth.CheckedChanged += new System.EventHandler(this.chkBirth_CheckedChanged);
+            // 
+            // pnlDeath
+            // 
+            this.pnlDeath.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlDeath.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlDeath.Controls.Add(this.chkDeath);
+            this.pnlDeath.Controls.Add(this.cmdDetahPick);
+            this.pnlDeath.Controls.Add(this.txtDeathYear);
+            this.pnlDeath.Controls.Add(this.txtDeathMonth);
+            this.pnlDeath.Controls.Add(this.txtDeathDate);
+            this.pnlDeath.Location = new System.Drawing.Point(83, 104);
+            this.pnlDeath.Name = "pnlDeath";
+            this.pnlDeath.Size = new System.Drawing.Size(158, 21);
+            this.pnlDeath.TabIndex = 36;
+            // 
+            // chkDeath
+            // 
+            this.chkDeath.AutoSize = true;
+            this.chkDeath.Location = new System.Drawing.Point(3, 3);
+            this.chkDeath.Name = "chkDeath";
+            this.chkDeath.Size = new System.Drawing.Size(15, 14);
+            this.chkDeath.TabIndex = 39;
+            this.chkDeath.UseVisualStyleBackColor = true;
+            this.chkDeath.CheckedChanged += new System.EventHandler(this.chkDeath_CheckedChanged);
+            // 
+            // cmdDetahPick
+            // 
+            this.cmdDetahPick.Location = new System.Drawing.Point(131, -1);
+            this.cmdDetahPick.Name = "cmdDetahPick";
+            this.cmdDetahPick.Size = new System.Drawing.Size(24, 19);
+            this.cmdDetahPick.TabIndex = 38;
+            this.cmdDetahPick.Text = "V";
+            this.cmdDetahPick.UseVisualStyleBackColor = true;
+            this.cmdDetahPick.Click += new System.EventHandler(this.cmdDetahPick_Click);
+            // 
+            // txtDeathYear
+            // 
+            this.txtDeathYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDeathYear.Location = new System.Drawing.Point(85, 2);
+            this.txtDeathYear.Maximum = new decimal(new int[] {
+            2099,
+            0,
+            0,
+            0});
+            this.txtDeathYear.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.txtDeathYear.Name = "txtDeathYear";
+            this.txtDeathYear.Size = new System.Drawing.Size(47, 16);
+            this.txtDeathYear.TabIndex = 37;
+            this.txtDeathYear.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // txtDeathMonth
+            // 
+            this.txtDeathMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDeathMonth.Location = new System.Drawing.Point(35, 2);
+            this.txtDeathMonth.Name = "txtDeathMonth";
+            this.txtDeathMonth.Size = new System.Drawing.Size(50, 13);
+            this.txtDeathMonth.TabIndex = 36;
+            // 
+            // txtDeathDate
+            // 
+            this.txtDeathDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDeathDate.Location = new System.Drawing.Point(20, 2);
+            this.txtDeathDate.Name = "txtDeathDate";
+            this.txtDeathDate.Size = new System.Drawing.Size(18, 13);
+            this.txtDeathDate.TabIndex = 35;
+            // 
             // IndiEdit
             // 
             this.AcceptButton = this.cmdOK;
@@ -324,6 +477,9 @@
             this.CancelButton = this.cmdCancel;
             this.ClientSize = new System.Drawing.Size(443, 369);
             this.ControlBox = false;
+            this.Controls.Add(this.mcDatePicker);
+            this.Controls.Add(this.pnlDeath);
+            this.Controls.Add(this.pnlBirth);
             this.Controls.Add(this.cmdSource);
             this.Controls.Add(this.lblSource);
             this.Controls.Add(this.txtImage);
@@ -334,9 +490,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtDeath);
             this.Controls.Add(this.txtAKA);
-            this.Controls.Add(this.dtpDeath);
             this.Controls.Add(this.txtBirth);
-            this.Controls.Add(this.dtpBirth);
             this.Controls.Add(this.rdoFemale);
             this.Controls.Add(this.rdoMale);
             this.Controls.Add(this.label10);
@@ -355,7 +509,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "IndiEdit";
             this.Text = "Edit Individual";
+            this.Load += new System.EventHandler(this.IndiEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlBirth.ResumeLayout(false);
+            this.pnlBirth.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBirthYear)).EndInit();
+            this.pnlDeath.ResumeLayout(false);
+            this.pnlDeath.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeathYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,9 +539,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RadioButton rdoMale;
         private System.Windows.Forms.RadioButton rdoFemale;
-        private System.Windows.Forms.DateTimePicker dtpBirth;
         private System.Windows.Forms.TextBox txtBirth;
-        private System.Windows.Forms.DateTimePicker dtpDeath;
         private System.Windows.Forms.TextBox txtAKA;
         private System.Windows.Forms.TextBox txtDeath;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -392,5 +551,18 @@
         private System.Windows.Forms.OpenFileDialog ofdFile;
         private System.Windows.Forms.Label lblSource;
         private System.Windows.Forms.Button cmdSource;
+        private System.Windows.Forms.MonthCalendar mcDatePicker;
+        private System.Windows.Forms.Panel pnlBirth;
+        private System.Windows.Forms.CheckBox chkBirth;
+        private System.Windows.Forms.Button cmdBirthPick;
+        private System.Windows.Forms.NumericUpDown txtBirthYear;
+        private System.Windows.Forms.TextBox txtBirthMonth;
+        private System.Windows.Forms.TextBox txtBirthDate;
+        private System.Windows.Forms.Panel pnlDeath;
+        private System.Windows.Forms.CheckBox chkDeath;
+        private System.Windows.Forms.Button cmdDetahPick;
+        private System.Windows.Forms.NumericUpDown txtDeathYear;
+        private System.Windows.Forms.TextBox txtDeathMonth;
+        private System.Windows.Forms.TextBox txtDeathDate;
     }
 }
