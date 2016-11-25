@@ -71,7 +71,9 @@ namespace GedXMLEdit
         {
             XmlNode ChildNode = null;
 
-            if (Value != null)
+            if (Value == null)
+                Value = "";
+            else
                 Value = Value.Trim();
 
             if (Value == "")
@@ -137,6 +139,29 @@ namespace GedXMLEdit
                     Node.Attributes.Append(ChildNode);
                 }
                 ChildNode.Value = ID;
+            }
+            return ChildNode;
+        }
+
+        static public XmlNode UpdateMultipleFieldAttr(String Field, String Attr, String[] Values, XmlNode Node)
+        {
+            XmlNode ChildNode = null;
+            XmlAttribute ChildNodeAttr = null;
+
+            // Remove all nodes of type
+            for (int i = Node.ChildNodes.Count - 1; i >= 0; i--)
+            {
+                if (Node.ChildNodes[i].Name.ToUpper() == Field.ToUpper())
+                    Node.RemoveChild(Node.ChildNodes[i]);
+            }
+
+            foreach(string Value in Values)
+            {
+                ChildNode = Node.OwnerDocument.CreateElement(Field);
+                Node.AppendChild(ChildNode);
+                ChildNodeAttr = ChildNode.OwnerDocument.CreateAttribute(Attr);
+                ChildNode.Attributes.Append(ChildNodeAttr);
+                ChildNodeAttr.Value = Value;
             }
             return ChildNode;
         }

@@ -353,6 +353,20 @@ namespace GedXMLEdit
                     DisplayName = "? + ?" + ID;
             }
         }
+
+        override public void Edit()
+        {
+            FamEdit EditDialog = new FamEdit(pNode);
+
+            EditDialog.ShowDialog();
+            ResolveXrefs();
+//            foreach (XmlNode Child in pNode.ChildNodes)
+//            {
+//                if (Child.Name.ToUpper() == "NAME")
+//                    DisplayName = Child.InnerText.Trim();
+//            }
+        }
+
     }
 
     class GEDFileEntrySour : GEDFileEntry

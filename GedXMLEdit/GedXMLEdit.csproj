@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsGEDFile.cs" />
+    <Compile Include="FamEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FamEdit.Designer.cs">
+      <DependentUpon>FamEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FamEdit.resx">
+      <DependentUpon>FamEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

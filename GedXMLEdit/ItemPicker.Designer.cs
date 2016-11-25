@@ -44,7 +44,9 @@
             this.lstItems.MultiColumn = true;
             this.lstItems.Name = "lstItems";
             this.lstItems.Size = new System.Drawing.Size(330, 238);
+            this.lstItems.Sorted = true;
             this.lstItems.TabIndex = 0;
+            this.lstItems.DoubleClick += new System.EventHandler(this.lstItems_DoubleClick);
             // 
             // cmdOK
             // 

@@ -57,11 +57,11 @@
             this.cmdSource = new System.Windows.Forms.Button();
             this.mcDatePicker = new System.Windows.Forms.MonthCalendar();
             this.pnlBirth = new System.Windows.Forms.Panel();
+            this.chkBirth = new System.Windows.Forms.CheckBox();
             this.cmdBirthPick = new System.Windows.Forms.Button();
             this.txtBirthYear = new System.Windows.Forms.NumericUpDown();
             this.txtBirthMonth = new System.Windows.Forms.TextBox();
             this.txtBirthDate = new System.Windows.Forms.TextBox();
-            this.chkBirth = new System.Windows.Forms.CheckBox();
             this.pnlDeath = new System.Windows.Forms.Panel();
             this.chkDeath = new System.Windows.Forms.CheckBox();
             this.cmdDetahPick = new System.Windows.Forms.Button();
@@ -320,6 +320,7 @@
             this.mcDatePicker.Location = new System.Drawing.Point(361, 112);
             this.mcDatePicker.Name = "mcDatePicker";
             this.mcDatePicker.TabIndex = 29;
+            this.mcDatePicker.Tag = " ";
             this.mcDatePicker.Visible = false;
             this.mcDatePicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcDatePicker_DateChanged);
             // 
@@ -336,6 +337,16 @@
             this.pnlBirth.Name = "pnlBirth";
             this.pnlBirth.Size = new System.Drawing.Size(158, 21);
             this.pnlBirth.TabIndex = 35;
+            // 
+            // chkBirth
+            // 
+            this.chkBirth.AutoSize = true;
+            this.chkBirth.Location = new System.Drawing.Point(3, 3);
+            this.chkBirth.Name = "chkBirth";
+            this.chkBirth.Size = new System.Drawing.Size(15, 14);
+            this.chkBirth.TabIndex = 39;
+            this.chkBirth.UseVisualStyleBackColor = true;
+            this.chkBirth.CheckedChanged += new System.EventHandler(this.chkBirth_CheckedChanged);
             // 
             // cmdBirthPick
             // 
@@ -385,16 +396,6 @@
             this.txtBirthDate.Name = "txtBirthDate";
             this.txtBirthDate.Size = new System.Drawing.Size(18, 13);
             this.txtBirthDate.TabIndex = 35;
-            // 
-            // chkBirth
-            // 
-            this.chkBirth.AutoSize = true;
-            this.chkBirth.Location = new System.Drawing.Point(3, 3);
-            this.chkBirth.Name = "chkBirth";
-            this.chkBirth.Size = new System.Drawing.Size(15, 14);
-            this.chkBirth.TabIndex = 39;
-            this.chkBirth.UseVisualStyleBackColor = true;
-            this.chkBirth.CheckedChanged += new System.EventHandler(this.chkBirth_CheckedChanged);
             // 
             // pnlDeath
             // 

@@ -331,13 +331,13 @@ namespace GedXMLEdit
         private void mcDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
             MyDate D = new MyDate(mcDatePicker.SelectionStart);
-            if (mcDatePicker.Tag == "B")
+            if (mcDatePicker.Tag.ToString() == "B")
             {
                 txtBirthDate.Text = D.Day();
                 txtBirthMonth.Text = D.Month();
                 txtBirthYear.Text = D.Year();
             }
-            else if (mcDatePicker.Tag == "D")
+            else if (mcDatePicker.Tag.ToString() == "D")
             {
                 txtDeathDate.Text = D.Day();
                 txtDeathMonth.Text = D.Month();

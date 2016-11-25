@@ -66,5 +66,10 @@ namespace GedXMLEdit
             lstItems.SelectedItem = null; 
         }
 
+        private void lstItems_DoubleClick(object sender, EventArgs e)
+        {
+            cmdOK_Click(null, null);
+        }
+
     }
 }
