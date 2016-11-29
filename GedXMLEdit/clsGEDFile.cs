@@ -182,9 +182,10 @@ namespace GedXMLEdit
             DisplayName = "";
         }
 
-        virtual public void Edit()
+        virtual public DialogResult Edit()
         {
             MessageBox.Show(DisplayName, "Not yet implemented: Unable to Edit Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return DialogResult.Cancel;
         }
     }
 
@@ -259,16 +260,21 @@ namespace GedXMLEdit
         }
 
 
-        override public void Edit()
+        override public DialogResult Edit()
         {
             IndiEdit EditDialog = new IndiEdit(pNode, ImageBase);
 
-            EditDialog.ShowDialog();
-            foreach (XmlNode Child in pNode.ChildNodes)
+            if (EditDialog.ShowDialog() == DialogResult.OK)
             {
-                if (Child.Name.ToUpper() == "NAME")
-                    DisplayName = Child.InnerText.Trim();
+                foreach (XmlNode Child in pNode.ChildNodes)
+                {
+                    if (Child.Name.ToUpper() == "NAME")
+                        DisplayName = Child.InnerText.Trim();
+                }
+                return DialogResult.OK;
             }
+            else
+                return DialogResult.Cancel;
         }
     }
 
@@ -354,12 +360,14 @@ namespace GedXMLEdit
             }
         }
 
-        override public void Edit()
+        override public DialogResult Edit()
         {
             FamEdit EditDialog = new FamEdit(pNode);
+            DialogResult DR ;
 
-            EditDialog.ShowDialog();
+            DR = EditDialog.ShowDialog();
             ResolveXrefs();
+            return DR ;
 //            foreach (XmlNode Child in pNode.ChildNodes)
 //            {
 //                if (Child.Name.ToUpper() == "NAME")

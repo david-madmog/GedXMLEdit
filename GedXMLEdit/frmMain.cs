@@ -18,10 +18,20 @@ namespace GedXMLEdit
         public frmGEDXmlEditor()
         {
             InitializeComponent();
+            Global.bChanged = false;
         }
 
         private void cmdLoad_Click(object sender, EventArgs e)
         {
+            if (Global.bChanged)
+            {
+                if (MessageBox.Show("File has changed. Discard Changes and load new file?", "Are you sure", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                    == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            Global.bChanged = false;
             try {
                 Log ("Loading " + txtFile.Text) ;
                 Doc.Load(txtFile.Text);
@@ -65,7 +75,11 @@ namespace GedXMLEdit
             GEDFileEntry Entry;
             Entry = (GEDFileEntry)lstItems.SelectedItem;
             Entry.ImageBase = txtImageBase.Text;
-            Entry.Edit();
+            if (Entry.Edit()== DialogResult.OK)
+            {
+                Global.bChanged = true;
+                this.Text = Global.Title + " *";
+            }
         }
 
         private void cmdNewItem_Click(object sender, EventArgs e)
@@ -84,7 +98,11 @@ namespace GedXMLEdit
 
                 Entry = Global.GedFile.NewEntry(Type, Doc);
                 Entry.ImageBase = txtImageBase.Text;
-                Entry.Edit();
+                if (Entry.Edit() == DialogResult.OK)
+                {
+                    Global.bChanged = true;
+                    this.Text = Global.Title + " *";
+                }
             }
             Global.GedFile.Display(lstItems, Type);
         }
@@ -97,6 +115,8 @@ namespace GedXMLEdit
         private void cmdSave_Click(object sender, EventArgs e)
         {       
             Doc.Save(txtFile.Text);
+            Global.bChanged = false;
+            this.Text = Global.Title ;
         }
 
         private void rdoIndi_CheckedChanged(object sender, EventArgs e)
@@ -129,11 +149,25 @@ namespace GedXMLEdit
             }
         }
 
+        private void frmGEDXmlEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Global.bChanged)
+            {
+                if (MessageBox.Show("File has changed. Save changes before Exit?", "Are you sure", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                    == DialogResult.Yes)
+                {
+                    Doc.Save(txtFile.Text);
+                }
+            }
+        }
+
     }
 
     public static class Global
     {
         public static GEDFile GedFile;
+        public static bool bChanged;
+        public static string Title = "GED XML Editor";
     }
 
 }

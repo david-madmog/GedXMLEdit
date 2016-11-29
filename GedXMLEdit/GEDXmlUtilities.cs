@@ -67,6 +67,23 @@ namespace GedXMLEdit
             return "";
         }
 
+        static public void ParseCompoundDate(XmlNode Child, MyDatePicker Picker)
+        {
+            MyDate tmpDateTime;
+            tmpDateTime = GEDXMLUtilites.ParseDate(Child);
+            if (tmpDateTime != MyDate.MinValue)
+            {
+                Picker.Checked = true;
+                Picker.Date = tmpDateTime;
+            }
+            else
+            {
+                Picker.Checked = false;
+            }
+            Picker.Place = GEDXMLUtilites.ParsePlace(Child);
+            Picker.Note = GEDXMLUtilites.ParseNote(Child);
+        }
+
         static public XmlNode UpdateSingleField(String Field, String Value, XmlNode Node)
         {
             XmlNode ChildNode = null;
@@ -164,6 +181,23 @@ namespace GedXMLEdit
                 ChildNodeAttr.Value = Value;
             }
             return ChildNode;
+        }
+
+        static public XmlNode UpdateCompoundDateField(string Field, MyDatePicker DatePicker, XmlNode Node)
+        {
+            if (DatePicker.Checked)
+            {
+                XmlNode TmpNode = GEDXMLUtilites.UpdateSingleField(Field, GEDXMLUtilites.InsertEmpty, Node);
+                GEDXMLUtilites.UpdateSingleField("DATE", DatePicker.Date.MedString(), TmpNode);
+                GEDXMLUtilites.UpdateSingleField("PLAC", DatePicker.Place, TmpNode);
+                GEDXMLUtilites.UpdateSingleField("NOTE", DatePicker.Note, TmpNode);
+                return TmpNode;
+            }
+            else
+            {
+                return GEDXMLUtilites.UpdateSingleField(Field, "", Node);
+            }
+
         }
 
         static public XmlNode GlobalLocateNodeByID(string ID, string NodeType, XmlNode Node)

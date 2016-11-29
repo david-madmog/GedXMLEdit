@@ -63,7 +63,6 @@ namespace GedXMLEdit
 
         private void ParseNodeToUIComponents(XmlNode Node)
         {
-            MyDate tmpDateTime;
             XmlNode tmpNode;
 
             pictureBox1.Image = pictureBox1.ErrorImage;
@@ -82,36 +81,10 @@ namespace GedXMLEdit
                             rdoFemale.Checked = true;
                         break;
                     case "BIRT":
-                        tmpDateTime = GEDXMLUtilites.ParseDate(Child);
-                        if (tmpDateTime != MyDate.MinValue)
-                        {
-                            chkBirth.Checked = true;
-                            txtBirthDate.Text = tmpDateTime.Day();
-                            txtBirthMonth.Text = tmpDateTime.Month();
-                            txtBirthYear.Text = tmpDateTime.Year();
-                        }
-                        else
-                        {
-                            chkBirth.Checked = false;
-                        }
-                        txtBirth.Text = GEDXMLUtilites.ParsePlace(Child);
-                        BirthNote = GEDXMLUtilites.ParseNote(Child);
+                        GEDXMLUtilites.ParseCompoundDate(Child, mdpBirth);
                         break;
                     case "DEAT":
-                        tmpDateTime = GEDXMLUtilites.ParseDate(Child);
-                        if (tmpDateTime != MyDate.MinValue)
-                        {
-                            chkDeath.Checked = true;
-                            txtDeathDate.Text = tmpDateTime.Day();
-                            txtDeathMonth.Text = tmpDateTime.Month();
-                            txtDeathYear.Text = tmpDateTime.Year();
-                        }
-                        else
-                        {
-                            chkDeath.Checked = false;
-                        }
-                        txtDeath.Text = GEDXMLUtilites.ParsePlace(Child);
-                        DeathNote = GEDXMLUtilites.ParseNote(Child);
+                        GEDXMLUtilites.ParseCompoundDate(Child, mdpDeath);
                         break;
                     case "EVEN":
                         txtAKA.Text = GEDXMLUtilites.ParseText(Child);
@@ -157,31 +130,9 @@ namespace GedXMLEdit
             else
                 GEDXMLUtilites.UpdateSingleField("SEX", "F", Node);
 
-            if (chkBirth.Checked)
-            {
-                TmpNode = GEDXMLUtilites.UpdateSingleField("BIRT", GEDXMLUtilites.InsertEmpty, Node);
-                MyDate tmpDate = new MyDate(txtBirthYear.Value.ToString(), txtBirthMonth.Text, txtBirthDate.Text);
-                GEDXMLUtilites.UpdateSingleField("DATE", tmpDate.MedString(), TmpNode);
-                GEDXMLUtilites.UpdateSingleField("PLAC", txtBirth.Text, TmpNode);
-                GEDXMLUtilites.UpdateSingleField("NOTE", BirthNote, TmpNode);
-            }
-            else
-            {
-                GEDXMLUtilites.UpdateSingleField("BIRT", "", Node);
-            }
+            GEDXMLUtilites.UpdateCompoundDateField("BIRT", mdpBirth, Node);
+            GEDXMLUtilites.UpdateCompoundDateField("DEAT", mdpDeath, Node);
             
-            if (chkDeath.Checked)
-            {
-                TmpNode = GEDXMLUtilites.UpdateSingleField("DEAT", GEDXMLUtilites.InsertEmpty, Node);
-                MyDate tmpDate = new MyDate(txtDeathYear.Value.ToString(), txtDeathMonth.Text, txtDeathDate.Text);
-                GEDXMLUtilites.UpdateSingleField("DATE", tmpDate.MedString(), TmpNode);
-                GEDXMLUtilites.UpdateSingleField("PLAC", txtDeath.Text, TmpNode);
-                GEDXMLUtilites.UpdateSingleField("NOTE", DeathNote, TmpNode);
-            }
-            else
-            {
-                GEDXMLUtilites.UpdateSingleField("DEAT", "", Node);
-            }
             if (txtAKA.Text != "")
             {
                 TmpNode = GEDXMLUtilites.UpdateSingleField("EVEN", txtAKA.Text, Node);
@@ -220,11 +171,13 @@ namespace GedXMLEdit
         private void cmdOK_Click(object sender, EventArgs e)
         {
             UpdateAllFields(MyNode);
+            this.DialogResult = DialogResult.OK; 
             this.Close();
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel; 
             this.Close();
         }
 
@@ -241,18 +194,6 @@ namespace GedXMLEdit
 
             txtImage.Text = Path.GetFileName(ofdFile.FileName);
             LoadImage(txtImage.Text);
-        }
-
-        private void cmdBirth_Click(object sender, EventArgs e)
-        {
-            NoteEdit NE = new NoteEdit();
-            BirthNote = NE.ShowDialogAndReturnString(BirthNote);
-        }
-
-        private void cmdDeath_Click(object sender, EventArgs e)
-        {
-            NoteEdit NE = new NoteEdit();
-            DeathNote = NE.ShowDialogAndReturnString(DeathNote);
         }
 
         private void cmdNote_Click(object sender, EventArgs e)
@@ -283,102 +224,5 @@ namespace GedXMLEdit
                 }
             }
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void IndiEdit_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmdBirthPick_Click(object sender, EventArgs e)
-        {
-            if (mcDatePicker.Visible)
-            {
-                mcDatePicker.Visible = false;
-                mcDatePicker.Tag = "";
-            }
-            else
-            {
-                mcDatePicker.Top = pnlBirth.Top + pnlBirth.Height;
-                mcDatePicker.Left = pnlBirth.Left;
-                MyDate tmpDate = new MyDate(txtBirthYear.Value.ToString(), txtBirthMonth.Text, txtBirthDate.Text);
-                mcDatePicker.SelectionRange = new SelectionRange(tmpDate.ToDateTime(), tmpDate.ToDateTime());
-                mcDatePicker.Visible = true;
-                mcDatePicker.Tag = "B";
-            }
-        }
-
-        private void chkBirth_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkBirth.Checked)
-            {
-                txtBirthDate.Enabled = true;
-                txtBirthMonth.Enabled = true;
-                txtBirthYear.Enabled = true;
-            }
-            else
-            {
-                txtBirthDate.Enabled = false;
-                txtBirthMonth.Enabled = false;
-                txtBirthYear.Enabled = false;
-            }
-        }
-
-        private void mcDatePicker_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            MyDate D = new MyDate(mcDatePicker.SelectionStart);
-            if (mcDatePicker.Tag.ToString() == "B")
-            {
-                txtBirthDate.Text = D.Day();
-                txtBirthMonth.Text = D.Month();
-                txtBirthYear.Text = D.Year();
-            }
-            else if (mcDatePicker.Tag.ToString() == "D")
-            {
-                txtDeathDate.Text = D.Day();
-                txtDeathMonth.Text = D.Month();
-                txtDeathYear.Text = D.Year();
-            }
-        }
-
-        private void cmdDetahPick_Click(object sender, EventArgs e)
-        {
-            if (mcDatePicker.Visible)
-            {
-                mcDatePicker.Visible = false;
-                mcDatePicker.Tag = "";
-            }
-            else
-            {
-                mcDatePicker.Top = pnlDeath.Top + pnlDeath.Height;
-                mcDatePicker.Left = pnlDeath.Left;
-                MyDate tmpDate = new MyDate(txtDeathYear.Value.ToString(), txtDeathMonth.Text, txtDeathDate.Text);
-                mcDatePicker.SelectionRange = new SelectionRange(tmpDate.ToDateTime(), tmpDate.ToDateTime());
-                mcDatePicker.Visible = true;
-                mcDatePicker.Tag = "D";
-            }
-        }
-
-        private void chkDeath_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDeath.Checked)
-            {
-                txtDeathDate.Enabled = true;
-                txtDeathMonth.Enabled = true;
-                txtDeathYear.Enabled = true;
-            }
-            else
-            {
-                txtDeathDate.Enabled = false;
-                txtDeathMonth.Enabled = false;
-                txtDeathYear.Enabled = false;
-            }
-
-        }
-
     }
 }

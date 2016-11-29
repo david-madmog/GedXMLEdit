@@ -40,16 +40,10 @@
             this.cmdCancel = new System.Windows.Forms.Button();
             this.lblHusband = new System.Windows.Forms.Label();
             this.lblWife = new System.Windows.Forms.Label();
-            this.mcDatePicker = new System.Windows.Forms.MonthCalendar();
-            this.pnlMarr = new System.Windows.Forms.Panel();
-            this.chkMarr = new System.Windows.Forms.CheckBox();
-            this.cmdMarrPick = new System.Windows.Forms.Button();
-            this.txtMarrYear = new System.Windows.Forms.NumericUpDown();
-            this.txtMarrMonth = new System.Windows.Forms.TextBox();
-            this.txtMarrDate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.pnlMarr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMarrYear)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.mdpMarriage = new GedXMLEdit.MyDatePicker();
+            this.mdpDivorce = new GedXMLEdit.MyDatePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -130,7 +124,7 @@
             // 
             // cmdOK
             // 
-            this.cmdOK.Location = new System.Drawing.Point(395, 161);
+            this.cmdOK.Location = new System.Drawing.Point(396, 275);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(75, 23);
             this.cmdOK.TabIndex = 10;
@@ -141,7 +135,7 @@
             // cmdCancel
             // 
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(314, 161);
+            this.cmdCancel.Location = new System.Drawing.Point(315, 275);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 11;
@@ -169,87 +163,6 @@
             this.lblWife.TabIndex = 13;
             this.lblWife.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // mcDatePicker
-            // 
-            this.mcDatePicker.Location = new System.Drawing.Point(191, 166);
-            this.mcDatePicker.Name = "mcDatePicker";
-            this.mcDatePicker.TabIndex = 37;
-            this.mcDatePicker.Visible = false;
-            this.mcDatePicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcDatePicker_DateChanged);
-            // 
-            // pnlMarr
-            // 
-            this.pnlMarr.BackColor = System.Drawing.SystemColors.Window;
-            this.pnlMarr.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMarr.Controls.Add(this.chkMarr);
-            this.pnlMarr.Controls.Add(this.cmdMarrPick);
-            this.pnlMarr.Controls.Add(this.txtMarrYear);
-            this.pnlMarr.Controls.Add(this.txtMarrMonth);
-            this.pnlMarr.Controls.Add(this.txtMarrDate);
-            this.pnlMarr.Location = new System.Drawing.Point(13, 161);
-            this.pnlMarr.Name = "pnlMarr";
-            this.pnlMarr.Size = new System.Drawing.Size(158, 21);
-            this.pnlMarr.TabIndex = 38;
-            // 
-            // chkMarr
-            // 
-            this.chkMarr.AutoSize = true;
-            this.chkMarr.Location = new System.Drawing.Point(3, 3);
-            this.chkMarr.Name = "chkMarr";
-            this.chkMarr.Size = new System.Drawing.Size(15, 14);
-            this.chkMarr.TabIndex = 39;
-            this.chkMarr.UseVisualStyleBackColor = true;
-            this.chkMarr.CheckedChanged += new System.EventHandler(this.chkMarr_CheckedChanged);
-            // 
-            // cmdMarrPick
-            // 
-            this.cmdMarrPick.Location = new System.Drawing.Point(131, -1);
-            this.cmdMarrPick.Name = "cmdMarrPick";
-            this.cmdMarrPick.Size = new System.Drawing.Size(24, 19);
-            this.cmdMarrPick.TabIndex = 38;
-            this.cmdMarrPick.Text = "V";
-            this.cmdMarrPick.UseVisualStyleBackColor = true;
-            this.cmdMarrPick.Click += new System.EventHandler(this.cmdMarrPick_Click);
-            // 
-            // txtMarrYear
-            // 
-            this.txtMarrYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMarrYear.Location = new System.Drawing.Point(85, 2);
-            this.txtMarrYear.Maximum = new decimal(new int[] {
-            2099,
-            0,
-            0,
-            0});
-            this.txtMarrYear.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.txtMarrYear.Name = "txtMarrYear";
-            this.txtMarrYear.Size = new System.Drawing.Size(47, 16);
-            this.txtMarrYear.TabIndex = 37;
-            this.txtMarrYear.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            // 
-            // txtMarrMonth
-            // 
-            this.txtMarrMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMarrMonth.Location = new System.Drawing.Point(35, 2);
-            this.txtMarrMonth.Name = "txtMarrMonth";
-            this.txtMarrMonth.Size = new System.Drawing.Size(50, 13);
-            this.txtMarrMonth.TabIndex = 36;
-            // 
-            // txtMarrDate
-            // 
-            this.txtMarrDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMarrDate.Location = new System.Drawing.Point(20, 2);
-            this.txtMarrDate.Name = "txtMarrDate";
-            this.txtMarrDate.Size = new System.Drawing.Size(18, 13);
-            this.txtMarrDate.TabIndex = 35;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -259,15 +172,45 @@
             this.label4.TabIndex = 36;
             this.label4.Text = "Marriage";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 194);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Divorce";
+            // 
+            // mdpMarriage
+            // 
+            this.mdpMarriage.BackColor = System.Drawing.SystemColors.Window;
+            this.mdpMarriage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.mdpMarriage.Checked = false;
+            this.mdpMarriage.Location = new System.Drawing.Point(13, 161);
+            this.mdpMarriage.Name = "mdpMarriage";
+            this.mdpMarriage.Size = new System.Drawing.Size(390, 22);
+            this.mdpMarriage.TabIndex = 42;
+            // 
+            // mdpDivorce
+            // 
+            this.mdpDivorce.BackColor = System.Drawing.SystemColors.Window;
+            this.mdpDivorce.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.mdpDivorce.Checked = false;
+            this.mdpDivorce.Location = new System.Drawing.Point(13, 210);
+            this.mdpDivorce.Name = "mdpDivorce";
+            this.mdpDivorce.Size = new System.Drawing.Size(390, 22);
+            this.mdpDivorce.TabIndex = 41;
+            // 
             // FamEdit
             // 
             this.AcceptButton = this.cmdOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
-            this.ClientSize = new System.Drawing.Size(478, 191);
-            this.Controls.Add(this.mcDatePicker);
-            this.Controls.Add(this.pnlMarr);
+            this.ClientSize = new System.Drawing.Size(478, 357);
+            this.Controls.Add(this.mdpMarriage);
+            this.Controls.Add(this.mdpDivorce);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblWife);
             this.Controls.Add(this.lblHusband);
@@ -283,9 +226,6 @@
             this.Controls.Add(this.label1);
             this.Name = "FamEdit";
             this.Text = "Edit Family";
-            this.pnlMarr.ResumeLayout(false);
-            this.pnlMarr.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMarrYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,13 +245,9 @@
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.Label lblHusband;
         private System.Windows.Forms.Label lblWife;
-        private System.Windows.Forms.MonthCalendar mcDatePicker;
-        private System.Windows.Forms.Panel pnlMarr;
-        private System.Windows.Forms.CheckBox chkMarr;
-        private System.Windows.Forms.Button cmdMarrPick;
-        private System.Windows.Forms.NumericUpDown txtMarrYear;
-        private System.Windows.Forms.TextBox txtMarrMonth;
-        private System.Windows.Forms.TextBox txtMarrDate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private MyDatePicker mdpDivorce;
+        private MyDatePicker mdpMarriage;
     }
 }

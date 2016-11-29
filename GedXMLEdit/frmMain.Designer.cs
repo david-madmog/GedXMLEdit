@@ -202,6 +202,7 @@
             this.Controls.Add(this.txtFile);
             this.Name = "frmGEDXmlEditor";
             this.Text = "GEDXmlEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGEDXmlEditor_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

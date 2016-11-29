@@ -71,6 +71,12 @@
       <DependentUpon>IndiEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="MyDate.cs" />
+    <Compile Include="MyDatePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyDatePicker.Designer.cs">
+      <DependentUpon>MyDatePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="NoteEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ItemPicker.resx">
       <DependentUpon>ItemPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyDatePicker.resx">
+      <DependentUpon>MyDatePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NoteEdit.resx">
       <DependentUpon>NoteEdit.cs</DependentUpon>

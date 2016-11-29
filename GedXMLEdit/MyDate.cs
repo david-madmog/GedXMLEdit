@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GedXMLEdit
 {
-    class MyDate
+    public class MyDate
     {
         private int pYear;
         private int pMonth;
@@ -21,39 +21,9 @@ namespace GedXMLEdit
 
         public MyDate(String Year, String Month, String Day)
         {
-            try
-            {
-                if (Year != "")
-                    pYear = Int32.Parse(Year);
-                else
-                    pYear = -1;
-            }
-            catch (Exception)
-            {
-                pYear = -1;
-            }
-            try
-            {
-                if (Month != "")
-                    pMonth = DateTime.Parse("1 " + Month + " 1900").Month;
-                else
-                    pMonth = -1;
-            }
-            catch (Exception)
-            {
-                pMonth = -1;
-            }
-            try
-            {
-                if (Day != "")
-                    pDay = Int32.Parse(Day);
-                else
-                    pDay = -1;
-            }
-            catch (Exception)
-            {
-                pDay = -1;
-            }
+            this.year = Year;
+            this.month = Month;
+            this.day = Day;
         }
 
         public DateTime ToDateTime()
@@ -70,29 +40,81 @@ namespace GedXMLEdit
             }
         }
 
-        public string Day()
+        public string day
         {
-            if (pDay >= 0)
-                return pDay.ToString();
-            else
-                return "";
+            set
+            {
+                try
+                {
+                    if (value != "")
+                        pDay = Int32.Parse(value);
+                    else
+                        pDay = -1;
+                }
+                catch (Exception)
+                {
+                    pDay = -1;
+                }
+            }
+            get
+            {
+                if (pDay >= 0)
+                    return pDay.ToString();
+                else
+                    return "";
+            }
         }
 
-        public string Month()
+        public string month
         {
-            if (pMonth >= 0)
-                return new DateTime(1900, pMonth, 1).ToString("MMMM");
-            else
-                return "";
+            set
+            {
+                try
+                {
+                    if (value != "")
+                        pMonth = DateTime.Parse("1 " + value + " 1900").Month;
+                    else
+                        pMonth = -1;
+                }
+                catch (Exception)
+                {
+                    pMonth = -1;
+                }
+            }
+            get
+            {
+                if (pMonth >= 0)
+                    return new DateTime(1900, pMonth, 1).ToString("MMMM");
+                else
+                    return "";
+            }
         }
 
-        public string Year()
+        public string year
         {
-            if (pYear >= 0)
-                return pYear.ToString();
-            else
-                return "";
+            set
+            {
+                try
+                {
+                    if (value != "")
+                        pYear = Int32.Parse(value);
+                    else
+                        pYear = -1;
+                }
+                catch (Exception)
+                {
+                    pYear = -1;
+                }
+            }
+            get
+            {
+                if (pYear >= 0)
+                    return pYear.ToString();
+                else
+                    return "";
+            }
         }
+
 
         public string MedString()
         {

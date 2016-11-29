@@ -36,7 +36,6 @@ namespace GedXMLEdit
 
         private void ParseNodeToUIComponents(XmlNode Node)
         {
-            MyDate tmpDateTime;
             XmlNode tmpNode;
             string sID;
 
@@ -77,20 +76,10 @@ namespace GedXMLEdit
                         }
                         break;
                     case "MARR":
-                        tmpDateTime = GEDXMLUtilites.ParseDate(Child);
-                        if (tmpDateTime != MyDate.MinValue)
-                        {
-                            chkMarr.Checked = true;
-                            txtMarrDate.Text = tmpDateTime.Day();
-                            txtMarrMonth.Text = tmpDateTime.Month();
-                            txtMarrYear.Text = tmpDateTime.Year();
-                        }
-                        else
-                        {
-                            chkMarr.Checked = false;
-                        }
-//                        txtBirth.Text = GEDXMLUtilites.ParsePlace(Child);
-//                        BirthNote = GEDXMLUtilites.ParseNote(Child);
+                        GEDXMLUtilites.ParseCompoundDate(Child, mdpMarriage);
+                        break;
+                    case "DIV":
+                        GEDXMLUtilites.ParseCompoundDate(Child, mdpDivorce);
                         break; 
                     default:
                         break;
@@ -102,18 +91,8 @@ namespace GedXMLEdit
         {
             XmlNode TmpNode;
 
-            if (chkMarr.Checked)
-            {
-                TmpNode = GEDXMLUtilites.UpdateSingleField("MARR", GEDXMLUtilites.InsertEmpty, Node);
-                MyDate tmpDate = new MyDate(txtMarrYear.Value.ToString(), txtMarrMonth.Text, txtMarrDate.Text);
-                GEDXMLUtilites.UpdateSingleField("DATE", tmpDate.MedString(), TmpNode);
-//                GEDXMLUtilites.UpdateSingleField("PLAC", txtBirth.Text, TmpNode);
-//                GEDXMLUtilites.UpdateSingleField("NOTE", BirthNote, TmpNode);
-            }
-            else
-            {
-                GEDXMLUtilites.UpdateSingleField("MARR", "", Node);
-            }
+            GEDXMLUtilites.UpdateCompoundDateField("MARR", mdpMarriage, Node);
+            GEDXMLUtilites.UpdateCompoundDateField("DIV", mdpDivorce, Node);
 
             if (lblHusband.Text != "")
             {
@@ -181,11 +160,13 @@ namespace GedXMLEdit
         private void cmdOK_Click(object sender, EventArgs e)
         {
             UpdateAllFields(MyNode);
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -279,46 +260,5 @@ namespace GedXMLEdit
                 lstChildren.Items.RemoveAt(lstChildren.SelectedIndex);
         }
 
-        private void chkMarr_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkMarr.Checked)
-            {
-                txtMarrDate.Enabled = true;
-                txtMarrMonth.Enabled = true;
-                txtMarrYear.Enabled = true;
-            }
-            else
-            {
-                txtMarrDate.Enabled = false;
-                txtMarrMonth.Enabled = false;
-                txtMarrYear.Enabled = false;
-            }
-
-        }
-
-        private void cmdMarrPick_Click(object sender, EventArgs e)
-        {
-            if (mcDatePicker.Visible)
-            {
-                mcDatePicker.Visible = false;
-            }
-            else
-            {
-                mcDatePicker.Top = pnlMarr.Top - mcDatePicker.Height;
-                mcDatePicker.Left = pnlMarr.Left;
-                MyDate tmpDate = new MyDate(txtMarrYear.Value.ToString(), txtMarrMonth.Text, txtMarrDate.Text);
-                mcDatePicker.SelectionRange = new SelectionRange(tmpDate.ToDateTime(), tmpDate.ToDateTime());
-                mcDatePicker.Visible = true;
-            }
- 
-        }
-
-        private void mcDatePicker_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            MyDate D = new MyDate(mcDatePicker.SelectionStart);
-            txtMarrDate.Text = D.Day();
-            txtMarrMonth.Text = D.Month();
-            txtMarrYear.Text = D.Year();
-        }
     }
 }
